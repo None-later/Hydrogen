@@ -10,7 +10,7 @@ r = RMAX/N:RMAX/N:RMAX;
 % V(r)
 pot = DE*(1-exp(-BETA*((r-RE).^2)))-DE;
 % plot(r, pot)
-% axis([0 15 -0.2 0.1]);
+axis([0 15 -0.2 0.1]);
 %% Kinetic Energy Matrix
 % Main diagonal
 KE = diag(-2*ones(1, N));
@@ -26,7 +26,5 @@ h = t+v;
 %% eigenfunctions
 % vs vibrational quantum numbers
 e = eig(h);
-negs = A(find(A<0));
 vs = 0:length(e)-1;
-plot(vs, e, '.-')
-axis([0 15 -0.2 0]);
+plot(vs, e)
