@@ -12,9 +12,12 @@ DELTAR = RMAX/N;
 r = RMAX/N:DELTAR:RMAX;
 % V(r)
 pot = DE*(1-exp(-BETA*(r-RE))).^2-DE;
-subplot(3, 1, 1);
+subplot(2, 2, 1);
 plot(r, pot)
 axis([0 15 -0.2 0.1]);
+xlabel('Radial coordinate (r) / a.u')
+ylabel('Morse Potential (V(r)) / a.u.')
+title('Morse Potential')
 %% Kinetic Energy Matrix
 % Main diagonal
 KE = diag(-2*ones(1, N));
@@ -32,16 +35,24 @@ h = t+v;
 % vs vibrational quantum numbers
 [s, e] = eig(h);
 vs = 0:length(e)-1;
-subplot(3, 1, 2);
+subplot(2, 2, 2);
 plot(vs, diag(e), '.-')
 axis([0 15 -0.2 0]);
-% Normalisation
-s = s*(1/sqrt(RMAX/N));
+xlabel('Vibrational Quantum Number')
+ylabel('Energy / a.u.')
+title('Quantum Number vs Energy')
+% Normalisation choose negative sqrt? otherwise graph is upside down in
+% comparison to assignment
+s = -s*(1/sqrt(RMAX/N));
 % Plot first 3 W.Fs fig.3 on assignment
-subplot(3, 1, 3);
+subplot(2, 2, [3 4]);
 plot(r, s(:, 1));
 hold on 
 plot(r, s(:, 2), '-.r');
 hold on
 plot(r, s(:, 3), '--g');
-axis([0 3 -2 2])
+xlabel('Radial coordinate (r) / a.u')
+ylabel('Wavefunction / a.u.')
+title('Ground, first and second excited wavefunctions for Hydrogen atom')
+legend('ground','first', 'second')
+axis([0 3 -1.5 1.6])
